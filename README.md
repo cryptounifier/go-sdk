@@ -18,7 +18,7 @@ You can use the `WalletAPI` class for convenient access to API methods. Some are
 
 ```go
 import (
-	"github.com/cryptounifier/go-sdk"
+    "github.com/cryptounifier/go-sdk"
     "log"
 )
 
@@ -38,7 +38,7 @@ You can use the `MerchantAPI` class for convenient access to API methods. Some a
 
 ```go
 import (
-	"github.com/cryptounifier/go-sdk"
+    "github.com/cryptounifier/go-sdk"
     "log"
 )
 
