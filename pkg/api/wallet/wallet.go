@@ -2,6 +2,7 @@ package wallet
 
 import (
 	"fmt"
+
 	"github.com/cryptounifier/go-sdk/pkg/api/base"
 	"github.com/cryptounifier/go-sdk/pkg/models"
 )
@@ -13,7 +14,7 @@ type WalletAPIClient interface {
 	//EstimateFee estimates a final transaction fee and it fee per byte cost
 	EstimateFee(destinations map[string]interface{}, feePerByte float64, extraField string) (models.Response, error)
 	//ValidateAddress check if an address list is currently valid for selected cryptocurrency
-	ValidateAddress(addresses []interface{}) (models.Response, error)
+	ValidateAddress(addresses []interface{}, validateActivation bool) (models.Response, error)
 	//GetBalance get confirmed and unconfirmed cryptocurrency balance
 	GetBalance() (models.Response, error)
 	//GetDepositAddresses get the list of cryptocurrency deposit addresses
@@ -79,9 +80,10 @@ func (c client) EstimateFee(destinations map[string]interface{}, feePerByte floa
 	return *resp, nil
 }
 
-func (c client) ValidateAddress(addresses []interface{}) (models.Response, error) {
+func (c client) ValidateAddress(addresses []interface{}, validateActivation bool) (models.Response, error) {
 	body := map[string]interface{}{
-		"addresses": addresses,
+		"addresses":           addresses,
+		"validate_activation": validateActivation,
 	}
 
 	resp, err := c.BaseAPI.ExecuteRequest(base.RequestMethod.POST, "validate-addresses", body)
